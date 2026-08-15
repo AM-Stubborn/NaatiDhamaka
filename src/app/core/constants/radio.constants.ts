@@ -57,6 +57,8 @@ export const PLAYER_TIMING = {
   initTimeoutMs: 20000,
   metadataSyncMs: 400,
   progressTickMs: 250,
+  playlistCueMs: 80,
+  playlistSwitchFallbackMs: 2000,
 } as const;
 
 export const MAX_UNAVAILABLE_SKIPS = 8;

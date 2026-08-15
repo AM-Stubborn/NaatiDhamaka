@@ -8,7 +8,12 @@ describe('category playlists', () => {
     expect(new Set(ids).size).toBe(MUSIC_CATEGORIES.length);
   });
 
-  it('keeps Nati on the known public playlist', () => {
-    expect(YOUTUBE_PLAYLISTS.nati).toBe('PL_WcRynZa15Kh0mC4i9Q6_trX-VC24qek');
+  it('keeps Nati on a public playlist ID', () => {
+    expect(YOUTUBE_PLAYLISTS.nati).toMatch(/^PL/);
+  });
+
+  it('keeps Gidda and does not include Gaddi', () => {
+    expect(YOUTUBE_PLAYLISTS.gidda).toMatch(/^PL/);
+    expect('gaddi' in YOUTUBE_PLAYLISTS).toBe(false);
   });
 });

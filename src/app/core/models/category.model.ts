@@ -2,7 +2,6 @@ export type CategoryId =
   | 'nati'
   | 'kinnauri-nati'
   | 'gidda'
-  | 'gaddi'
   | 'jhoori-harul'
   | 'chamba-folk'
   | 'lahaul-spiti'
@@ -21,7 +20,6 @@ export const MUSIC_CATEGORIES: readonly Category[] = [
   { id: 'nati', nameEn: 'Nati', nameHi: 'नाटी' },
   { id: 'kinnauri-nati', nameEn: 'Kinnauri Nati', nameHi: 'किन्नौरी नाटी' },
   { id: 'gidda', nameEn: 'Gidda', nameHi: 'गिद्दा' },
-  { id: 'gaddi', nameEn: 'Gaddi Songs', nameHi: 'गद्दी गीत' },
   { id: 'jhoori-harul', nameEn: 'Jhoori / Harul', nameHi: 'झूरी / हारुल' },
   { id: 'chamba-folk', nameEn: 'Chamba Folk', nameHi: 'चम्बा लोक' },
   { id: 'lahaul-spiti', nameEn: 'Lahaul & Spiti', nameHi: 'लाहौल-स्पीति' },
@@ -80,8 +78,6 @@ export function categoryWedgeLabel(category: Category): readonly string[] {
   switch (category.id) {
     case 'kinnauri-nati':
       return ['किन्नौरी', 'नाटी'];
-    case 'gaddi':
-      return ['गद्दी', 'गीत'];
     case 'jhoori-harul':
       return ['झूरी', 'हारुल'];
     case 'chamba-folk':

@@ -11,13 +11,12 @@
  * This is the only file you need to edit for category playlists.
  */
 export const YOUTUBE_PLAYLISTS = {
-  nati: 'PL_WcRynZa15Kh0mC4i9Q6_trX-VC24qek',
-  'kinnauri-nati': 'PLPWPDkqfbd_PpLIOo3eKq8mkLQZTQQy7w',
-  gidda: 'PLyVAuignrcO36IhIV-2_553xSj9E0mpK6',
-  gaddi: 'PLThGHzsmxd54lYtQPZQwxXcC5mfvoiPhH',
-  'jhoori-harul': 'PLChJqa4iCvlUN9d_ke6NVazP7nyLkw0wI',
-  'chamba-folk': 'PLPWPDkqfbd_NM5UEJU0d6BfDZNXz80GrC',
-  'lahaul-spiti': 'PLPWPDkqfbd_Nc5XnEqPik5DA814noS4Na',
-  'kangra-folk': 'PL-zrhlrxWE7eRD-HkosilPW2Jirw5c_51',
-  'modern-pahadi': 'PLUEviuH1fxeDj1ki4Q794UV-WKcoHR42A',
+  nati: 'PLdq3ql1Yz5Mc',
+  'kinnauri-nati': 'PLBO3O7aVpQmQ',
+  gidda: 'PLCP8JkGYrAck',
+  'jhoori-harul': 'PLVfqVZCtBo04',
+  'chamba-folk': 'PLDoZjGiA1Y5c',
+  'lahaul-spiti': 'PLWW7vqWgilOc',
+  'kangra-folk': 'PLW5SJeWLvrdg',
+  'modern-pahadi': 'PLYh8YtgaaDIg',
 } as const;

@@ -40,7 +40,6 @@ export const YOUTUBE_PLAYLISTS = {
   nati: 'YOUR_NATI_PLAYLIST_ID',
   'kinnauri-nati': 'YOUR_KINNAURI_NATI_PLAYLIST_ID',
   gidda: 'YOUR_GIDDA_PLAYLIST_ID',
-  gaddi: 'YOUR_GADDI_PLAYLIST_ID',
   'jhoori-harul': 'YOUR_JHOORI_HARUL_PLAYLIST_ID',
   'chamba-folk': 'YOUR_CHAMBA_FOLK_PLAYLIST_ID',
   'lahaul-spiti': 'YOUR_LAHAUL_SPITI_PLAYLIST_ID',

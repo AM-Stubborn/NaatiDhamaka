@@ -8,6 +8,7 @@ import {
   OnDestroy,
   viewChild,
 } from '@angular/core';
+import { playlistForCategory } from '../../core/config/playlists';
 import { PLAYER_ELEMENT_ID, RADIO_COPY } from '../../core/constants/radio.constants';
 import type { CategoryId } from '../../core/models/category.model';
 import { StationService } from '../../core/services/station.service';
@@ -81,7 +82,7 @@ export class RadioComponent implements OnDestroy {
     }
 
     this.station.select(id);
-    this.youtube.switchPlaylist(this.station.playlistId());
+    this.youtube.switchPlaylist(playlistForCategory(id));
   }
 
   protected onRetry(): void {

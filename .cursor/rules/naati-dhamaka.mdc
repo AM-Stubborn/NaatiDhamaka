@@ -43,7 +43,7 @@ src/environments/      per-category playlist IDs
 - Full-bleed background: `public/himachal-valley.png` (sharp Himachal balcony / valley photo)
 - **No** wrapping `radio__content` glass card — title, cap, and player sit on the photo
 - **No** `station__cap-line`
-- Category picker is a **circular Pahari/Kullu cap** (`app-pahari-cap`), 9 wedges, embroidered red–green–gold rim
+- Category picker is a **circular Pahari/Kullu cap** (`app-pahari-cap`), 8 wedges, embroidered red–green–gold rim
 - Selected category name shows **in the cap center** (Hindi + English); Nati is 12 o’clock / default
 - Compact player: cover thumbnail, title, category line, seek bar, icon controls
 - Favicon is a round topi (`public/favicon.svg`)

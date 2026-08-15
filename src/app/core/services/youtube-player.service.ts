@@ -22,6 +22,9 @@ export class YoutubePlayerService {
   private playlistId: string = environment.youtube.playlists.nati;
   private destroyed = false;
   private playRequested = false;
+  private playerReady = false;
+  private awaitingPlaylistCue = false;
+  private playlistEpoch = 0;
   private unavailableSkips = 0;
   private pendingTimeouts = new Set<number>();
 
@@ -59,6 +62,8 @@ export class YoutubePlayerService {
     this.playlistId = playlistId;
     this.destroyed = false;
     this.playRequested = false;
+    this.playerReady = false;
+    this.awaitingPlaylistCue = false;
     this.unavailableSkips = 0;
     this.status.set('loading');
     this.errorMessage.set(null);
@@ -87,6 +92,9 @@ export class YoutubePlayerService {
       return;
     }
     this.playRequested = true;
+    if (this.awaitingPlaylistCue) {
+      return;
+    }
     this.enableShuffle();
     this.player.playVideo();
   }
@@ -134,23 +142,13 @@ export class YoutubePlayerService {
     this.currentTime.set(0);
     this.duration.set(0);
     this.stopProgressClock();
+    this.beginPlaylistCue();
 
-    if (!this.player) {
+    if (!this.playerReady) {
       return;
     }
 
-    this.logDev('Switching playlist', playlistId);
-    this.player.loadPlaylist({
-      listType: 'playlist',
-      list: playlistId,
-      index: 0,
-    });
-    this.player.setLoop(true);
-    this.enableShuffle();
-
-    if (this.playRequested) {
-      this.play();
-    }
+    this.cueConfiguredPlaylist();
   }
 
   getPlayerState(): PlayerStateName {
@@ -174,6 +172,8 @@ export class YoutubePlayerService {
 
   destroy(): void {
     this.destroyed = true;
+    this.playerReady = false;
+    this.awaitingPlaylistCue = false;
     this.stopProgressClock();
     this.clearTimeouts();
     try {
@@ -289,28 +289,10 @@ export class YoutubePlayerService {
     }
 
     this.player = player;
-    player.setLoop(true);
-    this.enableShuffle();
-
-    const playlist = player.getPlaylist();
-    if (!playlist?.length) {
-      this.logDev('Playlist was empty on ready; cueing configured playlist');
-      player.cuePlaylist({
-        listType: 'playlist',
-        list: this.playlistId,
-        index: 0,
-      });
-    }
-
-    this.syncFromPlayer();
-    if (this.playRequested) {
-      this.status.set('ready');
-      this.play();
-    } else {
-      player.pauseVideo();
-      this.status.set('awaiting-gesture');
-    }
+    this.playerReady = true;
     this.logDev('YouTube player ready', { playlistId: this.playlistId });
+    this.beginPlaylistCue();
+    this.cueConfiguredPlaylist();
   }
 
   private onStateChange(event: YT.OnStateChangeEvent): void {
@@ -320,6 +302,21 @@ export class YoutubePlayerService {
 
     const state = toPlayerStateName(event.data);
     this.playerState.set(state);
+
+    if (this.awaitingPlaylistCue) {
+      if (state === 'CUED') {
+        const epoch = this.playlistEpoch;
+        this.scheduleTimeout(() => {
+          if (epoch !== this.playlistEpoch) {
+            return;
+          }
+          this.finishPlaylistCue();
+        }, PLAYER_TIMING.playlistCueMs);
+      }
+      this.logDev(`Player state: ${state} (waiting for playlist)`);
+      return;
+    }
+
     this.syncFromPlayer();
 
     if (state === 'PLAYING') {
@@ -335,10 +332,6 @@ export class YoutubePlayerService {
     } else {
       this.stopProgressClock();
       this.syncProgress();
-    }
-
-    if (state === 'CUED' || state === 'PLAYING') {
-      this.enableShuffle();
     }
 
     if (state === 'ENDED') {
@@ -378,6 +371,78 @@ export class YoutubePlayerService {
     }
 
     this.fail(RADIO_COPY.errors.playerFailed);
+  }
+
+  private beginPlaylistCue(): void {
+    this.playlistEpoch += 1;
+    this.awaitingPlaylistCue = true;
+  }
+
+  private cueConfiguredPlaylist(): void {
+    if (!this.player) {
+      return;
+    }
+
+    const epoch = this.playlistEpoch;
+    this.logDev('Cueing playlist', this.playlistId);
+
+    try {
+      this.player.setShuffle(false);
+    } catch (error) {
+      this.logDev('Unable to disable shuffle before playlist change', error);
+    }
+
+    try {
+      this.player.stopVideo();
+    } catch (error) {
+      this.logDev('Unable to stop current video before playlist change', error);
+    }
+
+    this.player.cuePlaylist({
+      listType: 'playlist',
+      list: this.playlistId,
+      index: 0,
+    });
+    this.player.setLoop(true);
+
+    this.scheduleTimeout(() => {
+      if (epoch !== this.playlistEpoch) {
+        return;
+      }
+      this.finishPlaylistCue(true);
+    }, PLAYER_TIMING.playlistSwitchFallbackMs);
+  }
+
+  private finishPlaylistCue(force = false): void {
+    if (this.destroyed || !this.awaitingPlaylistCue) {
+      return;
+    }
+
+    let playlist: string[] | null | undefined;
+    try {
+      playlist = this.player?.getPlaylist();
+    } catch {
+      playlist = null;
+    }
+
+    if (!force && !playlist?.length) {
+      this.logDev('Waiting for playlist items after cue');
+      return;
+    }
+
+    this.awaitingPlaylistCue = false;
+    this.enableShuffle();
+    this.player?.setLoop(true);
+    this.syncFromPlayer();
+
+    if (this.playRequested) {
+      this.status.set('ready');
+      this.player?.playVideo();
+      return;
+    }
+
+    this.player?.pauseVideo();
+    this.status.set('awaiting-gesture');
   }
 
   private enableShuffle(): void {

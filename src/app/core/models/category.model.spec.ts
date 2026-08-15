@@ -20,7 +20,7 @@ describe('getCategory', () => {
 
 describe('categorySlicePath', () => {
   it('builds a circular slice path', () => {
-    const path = categorySlicePath(0, 9);
+    const path = categorySlicePath(0, 8);
     expect(path.startsWith('M ')).toBe(true);
     expect(path.includes(' A ')).toBe(true);
     expect(path.endsWith(' Z')).toBe(true);
@@ -29,7 +29,7 @@ describe('categorySlicePath', () => {
 
 describe('categoryLabelAnchor', () => {
   it('places the Nati label in the top slice', () => {
-    const point = categoryLabelAnchor(0, 9, 100);
+    const point = categoryLabelAnchor(0, 8, 100);
     expect(point.x).toBeGreaterThan(160);
     expect(point.y).toBeLessThan(160);
   });

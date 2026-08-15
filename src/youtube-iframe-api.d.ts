@@ -88,6 +88,7 @@ declare global {
       getCurrentTime(): number;
       getDuration(): number;
       seekTo(seconds: number, allowSeekAhead: boolean): void;
+      stopVideo(): void;
       destroy(): void;
     }
   }
