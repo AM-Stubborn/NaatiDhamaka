@@ -100,27 +100,37 @@ Upload that folder to any static host.
 
 ## Deploy to GitHub Pages
 
-This repository is named `NaatiDhamaka`, so project Pages usually live at:
+This repository is named `NaatiDhamaka`, so project Pages live at:
 
 ```text
 https://<user>.github.io/NaatiDhamaka/
 ```
 
-Build with that base href:
+A GitHub Action (`.github/workflows/deploy-github-pages.yml`) builds the production site with `--base-href /NaatiDhamaka/` and publishes `dist/naati-dhamaka/browser`.
 
-```bash
-npm run build:github-pages
-```
+### One-time GitHub setup
 
-Then publish the contents of `dist/naati-dhamaka/browser`.
+1. Push this repo to GitHub, including the workflow file.
+2. Open the repo → **Settings** → **Pages**.
+3. Under **Build and deployment** → **Source**, choose **GitHub Actions**.
+4. Make sure the default branch is `main`.
+5. The repo must be **public**, or you need GitHub Pro for Pages on a private repo.
 
-A `.nojekyll` file is included in `public/` so GitHub Pages does not skip files that start with an underscore.
+GitHub creates a `github-pages` environment on the first run. If the deploy job waits for approval, open **Settings** → **Environments** → **github-pages** and approve it (or turn off required reviewers).
 
-If you use user/organization Pages (`https://<user>.github.io/`), build with the default `/` base href instead:
+### First deploy
 
-```bash
-npm run build
-```
+Push to `main`, or run it by hand:
+
+1. Open **Actions**.
+2. Select **Deploy GitHub Pages**.
+3. Click **Run workflow**.
+
+When the **deploy** job is green, the site is at `https://<user>.github.io/NaatiDhamaka/`.
+
+A `.nojekyll` file in `public/` is copied into the build so GitHub Pages does not skip files that start with an underscore.
+
+If you use user/organization Pages (`https://<user>.github.io/`), change the workflow build step to `npm run build` instead of `npm run build:github-pages`.
 
 ## Other static hosts
 
