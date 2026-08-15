@@ -9,7 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { PLAYER_ELEMENT_ID, RADIO_COPY } from '../../core/constants/radio.constants';
-import type { DistrictId } from '../../core/models/district.model';
+import type { CategoryId } from '../../core/models/category.model';
 import { StationService } from '../../core/services/station.service';
 import { YoutubePlayerService } from '../../core/services/youtube-player.service';
 import { PahariCapComponent } from '../../shared/components/pahari-cap/pahari-cap.component';
@@ -46,8 +46,8 @@ export class RadioComponent implements OnDestroy {
   protected readonly currentTime = this.youtube.currentTime;
   protected readonly duration = this.youtube.duration;
   protected readonly progressPercent = this.youtube.progressPercent;
-  protected readonly districtId = this.station.selectedId;
-  protected readonly districtName = computed(() => this.station.selectedDistrict().nameHi);
+  protected readonly categoryId = this.station.selectedId;
+  protected readonly categoryName = computed(() => this.station.selectedCategory().nameHi);
 
   constructor() {
     afterNextRender(() => {
@@ -75,7 +75,7 @@ export class RadioComponent implements OnDestroy {
     this.youtube.seekToFraction(fraction);
   }
 
-  protected onDistrictSelect(id: DistrictId): void {
+  protected onCategorySelect(id: CategoryId): void {
     if (id === this.station.selectedId()) {
       return;
     }

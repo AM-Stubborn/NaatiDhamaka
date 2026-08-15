@@ -1,14 +1,14 @@
-import { HIMACHAL_DISTRICTS } from '../models/district.model';
-import { playlistForDistrict } from './playlists';
+import { MUSIC_CATEGORIES } from '../models/category.model';
+import { playlistForCategory } from './playlists';
 import { YOUTUBE_PLAYLISTS } from '../../../environments/youtube-playlists';
 
-describe('district playlists', () => {
-  it('has a unique playlist ID for every district', () => {
-    const ids = HIMACHAL_DISTRICTS.map((district) => playlistForDistrict(district.id));
-    expect(new Set(ids).size).toBe(HIMACHAL_DISTRICTS.length);
+describe('category playlists', () => {
+  it('has a unique playlist ID for every category', () => {
+    const ids = MUSIC_CATEGORIES.map((category) => playlistForCategory(category.id));
+    expect(new Set(ids).size).toBe(MUSIC_CATEGORIES.length);
   });
 
-  it('keeps Shimla on the known public playlist', () => {
-    expect(YOUTUBE_PLAYLISTS.shimla).toBe('PL_WcRynZa15Kh0mC4i9Q6_trX-VC24qek');
+  it('keeps Nati on the known public playlist', () => {
+    expect(YOUTUBE_PLAYLISTS.nati).toBe('PL_WcRynZa15Kh0mC4i9Q6_trX-VC24qek');
   });
 });

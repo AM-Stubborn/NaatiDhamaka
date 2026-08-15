@@ -1,7 +1,7 @@
 <div class="radio">
   <div class="radio__hero">
     <app-station-header />
-    <app-pahari-cap [selectedId]="districtId()" (districtSelect)="onDistrictSelect($event)" />
+    <app-pahari-cap [selectedId]="categoryId()" (categorySelect)="onCategorySelect($event)" />
   </div>
 
   @if (status() === 'loading' || status() === 'error' || status() === 'awaiting-gesture') {
@@ -18,7 +18,7 @@
     <app-now-playing
       [song]="currentSong()"
       [playerState]="playerState()"
-      [districtName]="districtName()"
+      [categoryName]="categoryName()"
       [isPlaying]="isPlaying()"
       [disabled]="!controlsEnabled()"
       [currentTime]="currentTime()"

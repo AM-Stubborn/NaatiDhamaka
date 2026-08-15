@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
 import { RADIO_COPY } from '../../../core/constants/radio.constants';
 import {
   CAP_GEOMETRY,
-  districtLabelAnchor,
-  districtSlicePath,
-  districtWedgeLabel,
-  getDistrict,
-  HIMACHAL_DISTRICTS,
-  type DistrictId,
-} from '../../../core/models/district.model';
+  categoryLabelAnchor,
+  categorySlicePath,
+  categoryWedgeLabel,
+  getCategory,
+  MUSIC_CATEGORIES,
+  type CategoryId,
+} from '../../../core/models/category.model';
 
 @Component({
   selector: 'app-pahari-cap',
@@ -17,8 +17,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PahariCapComponent {
-  readonly selectedId = input.required<DistrictId>();
-  readonly districtSelect = output<DistrictId>();
+  readonly selectedId = input.required<CategoryId>();
+  readonly categorySelect = output<CategoryId>();
 
   protected readonly copy = RADIO_COPY;
   protected readonly viewBox = [
@@ -27,39 +27,39 @@ export class PahariCapComponent {
     CAP_GEOMETRY.paddedSize,
     CAP_GEOMETRY.paddedSize,
   ].join(' ');
-  protected readonly slices = HIMACHAL_DISTRICTS.map((district, index) => {
-    const labelLines = districtWedgeLabel(district);
+  protected readonly slices = MUSIC_CATEGORIES.map((category, index) => {
+    const labelLines = categoryWedgeLabel(category);
     return {
-      ...district,
-      path: districtSlicePath(index),
-      label: districtLabelAnchor(index),
+      ...category,
+      path: categorySlicePath(index),
+      label: categoryLabelAnchor(index),
       labelLines,
-      isLong: labelLines.length > 1 || labelLines[0].length > 5,
+      isLong: labelLines.some((line) => line.length > 5),
     };
   });
-  protected readonly hoveredId = signal<DistrictId | null>(null);
+  protected readonly hoveredId = signal<CategoryId | null>(null);
 
   protected readonly displayed = computed(() => {
     const hovered = this.hoveredId();
-    return getDistrict(hovered ?? this.selectedId());
+    return getCategory(hovered ?? this.selectedId());
   });
 
-  protected isSelected(id: DistrictId): boolean {
+  protected isSelected(id: CategoryId): boolean {
     return this.selectedId() === id;
   }
 
-  protected isHovered(id: DistrictId): boolean {
+  protected isHovered(id: CategoryId): boolean {
     return this.hoveredId() === id;
   }
 
-  protected onSelect(id: DistrictId, event?: Event): void {
-    this.districtSelect.emit(id);
+  protected onSelect(id: CategoryId, event?: Event): void {
+    this.categorySelect.emit(id);
     if (event?.currentTarget instanceof SVGElement) {
       event.currentTarget.blur();
     }
   }
 
-  protected onKey(event: KeyboardEvent, id: DistrictId): void {
+  protected onKey(event: KeyboardEvent, id: CategoryId): void {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       this.onSelect(id);

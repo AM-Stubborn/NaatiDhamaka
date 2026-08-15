@@ -60,8 +60,8 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('नाटी धमाका');
     expect(compiled.textContent).toContain('सुन रहे हैं');
-    expect(compiled.textContent).toContain('अपना जिला चुनें');
-    expect(compiled.textContent).toContain('Choose your district');
+    expect(compiled.textContent).toContain('अपना संगीत चुनें');
+    expect(compiled.textContent).toContain('Choose your music');
     expect(compiled.textContent).toContain('Manish Bhatia');
     expect(compiled.querySelector('app-radio')).toBeTruthy();
   });

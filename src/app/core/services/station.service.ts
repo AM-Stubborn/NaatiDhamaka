@@ -1,18 +1,18 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { playlistForDistrict } from '../config/playlists';
+import { playlistForCategory } from '../config/playlists';
 import {
-  DEFAULT_DISTRICT_ID,
-  getDistrict,
-  type DistrictId,
-} from '../models/district.model';
+  DEFAULT_CATEGORY_ID,
+  getCategory,
+  type CategoryId,
+} from '../models/category.model';
 
 @Injectable({ providedIn: 'root' })
 export class StationService {
-  readonly selectedId = signal<DistrictId>(DEFAULT_DISTRICT_ID);
-  readonly selectedDistrict = computed(() => getDistrict(this.selectedId()));
-  readonly playlistId = computed((): string => playlistForDistrict(this.selectedId()));
+  readonly selectedId = signal<CategoryId>(DEFAULT_CATEGORY_ID);
+  readonly selectedCategory = computed(() => getCategory(this.selectedId()));
+  readonly playlistId = computed((): string => playlistForCategory(this.selectedId()));
 
-  select(id: DistrictId): void {
+  select(id: CategoryId): void {
     this.selectedId.set(id);
   }
 }

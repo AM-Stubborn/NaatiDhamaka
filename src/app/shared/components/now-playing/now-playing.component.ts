@@ -23,7 +23,7 @@ export class NowPlayingComponent {
   readonly currentTime = input(0);
   readonly duration = input(0);
   readonly progressPercent = input(0);
-  readonly districtName = input('शिमला');
+  readonly categoryName = input('नाटी');
 
   readonly playPause = output<void>();
   readonly next = output<void>();
@@ -45,7 +45,7 @@ export class NowPlayingComponent {
       case 'BUFFERING':
         return 'Tuning';
       default:
-        return this.districtName();
+        return this.categoryName();
     }
   }
 

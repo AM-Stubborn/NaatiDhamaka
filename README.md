@@ -27,28 +27,25 @@ npm start
 
 Then open [http://localhost:4200](http://localhost:4200).
 
-## Change district playlists
+## Change category playlists
 
-Each Himachal district has its own playlist ID in **one file**:
+Each music category has its own playlist ID in **one file**:
 
 `src/environments/youtube-playlists.ts`
 
-Default station is **Shimla**. If nothing is selected, Shimla plays.
+Default category is **Nati**. If nothing is selected, Nati plays.
 
 ```typescript
 export const YOUTUBE_PLAYLISTS = {
-  shimla: 'YOUR_SHIMLA_PLAYLIST_ID',
-  sirmaur: 'YOUR_SIRMAUR_PLAYLIST_ID',
-  solan: 'YOUR_SOLAN_PLAYLIST_ID',
-  bilaspur: 'YOUR_BILASPUR_PLAYLIST_ID',
-  hamirpur: 'YOUR_HAMIRPUR_PLAYLIST_ID',
-  una: 'YOUR_UNA_PLAYLIST_ID',
-  kangra: 'YOUR_KANGRA_PLAYLIST_ID',
-  chamba: 'YOUR_CHAMBA_PLAYLIST_ID',
+  nati: 'YOUR_NATI_PLAYLIST_ID',
+  'kinnauri-nati': 'YOUR_KINNAURI_NATI_PLAYLIST_ID',
+  gidda: 'YOUR_GIDDA_PLAYLIST_ID',
+  gaddi: 'YOUR_GADDI_PLAYLIST_ID',
+  'jhoori-harul': 'YOUR_JHOORI_HARUL_PLAYLIST_ID',
+  'chamba-folk': 'YOUR_CHAMBA_FOLK_PLAYLIST_ID',
   'lahaul-spiti': 'YOUR_LAHAUL_SPITI_PLAYLIST_ID',
-  kinnaur: 'YOUR_KINNAUR_PLAYLIST_ID',
-  kullu: 'YOUR_KULLU_PLAYLIST_ID',
-  mandi: 'YOUR_MANDI_PLAYLIST_ID',
+  'kangra-folk': 'YOUR_KANGRA_FOLK_PLAYLIST_ID',
+  'modern-pahadi': 'YOUR_MODERN_PAHADI_PLAYLIST_ID',
 };
 ```
 

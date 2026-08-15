@@ -19,7 +19,7 @@ import { songFromPlayerData, videoIdFromWatchUrl, type Song } from '../models/so
 @Injectable({ providedIn: 'root' })
 export class YoutubePlayerService {
   private player: YT.Player | null = null;
-  private playlistId: string = environment.youtube.playlists.shimla;
+  private playlistId: string = environment.youtube.playlists.nati;
   private destroyed = false;
   private playRequested = false;
   private unavailableSkips = 0;
@@ -54,7 +54,7 @@ export class YoutubePlayerService {
 
   async initialize(
     container: HTMLElement,
-    playlistId: string = environment.youtube.playlists.shimla,
+    playlistId: string = environment.youtube.playlists.nati,
   ): Promise<void> {
     this.playlistId = playlistId;
     this.destroyed = false;

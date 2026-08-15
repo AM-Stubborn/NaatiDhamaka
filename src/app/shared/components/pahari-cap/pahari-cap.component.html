@@ -1,7 +1,7 @@
 <div class="cap">
   <p class="cap__hint">
-    <span lang="hi">{{ copy.chooseDistrict }}</span>
-    <span class="cap__hint-en">{{ copy.chooseDistrictEn }}</span>
+    <span lang="hi">{{ copy.chooseCategory }}</span>
+    <span class="cap__hint-en">{{ copy.chooseCategoryEn }}</span>
   </p>
   <svg
     class="cap__svg"
@@ -94,7 +94,7 @@
           {{ slice.labelLines[0] }}
         } @else {
           @for (line of slice.labelLines; track line; let i = $index) {
-            <tspan [attr.x]="slice.label.x" [attr.dy]="i === 0 ? '-0.45em' : '1.15em'">{{ line }}</tspan>
+            <tspan [attr.x]="slice.label.x" [attr.dy]="i === 0 ? '-0.52em' : '1.28em'">{{ line }}</tspan>
           }
         }
       </text>
@@ -112,6 +112,13 @@
     >
       {{ displayed().nameHi }}
     </text>
-    <text class="cap__name-en" x="160" y="178">{{ displayed().nameEn }}</text>
+    <text
+      class="cap__name-en"
+      [class.is-long]="displayed().nameEn.length > 12"
+      x="160"
+      y="178"
+    >
+      {{ displayed().nameEn }}
+    </text>
   </svg>
 </div>

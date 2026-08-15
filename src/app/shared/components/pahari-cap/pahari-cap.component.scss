@@ -87,15 +87,15 @@
 .cap__wedge-name {
   fill: #f6f1e8;
   font-family: var(--font-devanagari);
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 700;
   paint-order: stroke fill;
   stroke: rgba(18, 24, 28, 0.55);
-  stroke-width: 2.2px;
+  stroke-width: 2.4px;
 }
 
 .cap__wedge-name.is-long {
-  font-size: 8.5px;
+  font-size: 13.5px;
 }
 
 .cap__wedge-name.is-active {
@@ -120,6 +120,11 @@
   letter-spacing: 0.08em;
 }
 
+.cap__name-en.is-long {
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
 @media (max-width: 767px) {
   :host {
     width: min(92vw, 24rem);
@@ -134,11 +139,11 @@
   }
 
   .cap__wedge-name {
-    font-size: 9.5px;
+    font-size: 14px;
   }
 
   .cap__wedge-name.is-long {
-    font-size: 7.5px;
+    font-size: 12px;
   }
 }
 
