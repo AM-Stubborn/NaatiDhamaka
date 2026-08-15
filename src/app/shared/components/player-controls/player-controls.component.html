@@ -1,0 +1,50 @@
+<div class="actions" role="group" aria-label="Radio controls">
+  <button
+    type="button"
+    class="icon"
+    [disabled]="disabled()"
+    [attr.aria-label]="copy.aria.previous"
+    (click)="previous.emit()"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="m19 20-9-8 9-8v16Z" fill="currentColor" />
+      <path d="M5 19V5" fill="none" stroke="currentColor" stroke-width="2" />
+    </svg>
+    <span class="sr-only">Previous</span>
+  </button>
+
+  <button
+    type="button"
+    class="icon icon--play"
+    [class.is-live]="isPlaying()"
+    [disabled]="disabled()"
+    [attr.aria-label]="isPlaying() ? copy.aria.pause : copy.aria.play"
+    (click)="playPause.emit()"
+  >
+    @if (isPlaying()) {
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M7 5h3.4v14H7V5Zm6.6 0H17v14h-3.4V5Z" fill="currentColor" />
+      </svg>
+      <span class="sr-only">Pause</span>
+    } @else {
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M8 5v14l11-7-11-7Z" fill="currentColor" />
+      </svg>
+      <span class="sr-only">Play</span>
+    }
+  </button>
+
+  <button
+    type="button"
+    class="icon"
+    [disabled]="disabled()"
+    [attr.aria-label]="copy.aria.next"
+    (click)="next.emit()"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="m5 4 9 8-9 8V4Z" fill="currentColor" />
+      <path d="M19 5v14" fill="none" stroke="currentColor" stroke-width="2" />
+    </svg>
+    <span class="sr-only">Next</span>
+  </button>
+</div>

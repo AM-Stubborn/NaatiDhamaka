@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Pahadi Radio  Pahadon Ki Awaaz">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101820"/>
+      <stop offset="45%" stop-color="#243547"/>
+      <stop offset="100%" stop-color="#c47a5a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <path d="M0 630 L0 390 L140 320 L260 420 L420 220 L580 380 L740 180 L900 360 L1040 260 L1200 400 L1200 630 Z" fill="#2b3844"/>
+  <path d="M0 630 L0 460 L180 380 L340 500 L520 300 L720 460 L900 320 L1200 470 L1200 630 Z" fill="#1b272f"/>
+  <path d="M0 630 L0 520 L220 450 L430 560 L650 420 L880 540 L1200 470 L1200 630 Z" fill="#10181e"/>
+  <text x="600" y="250" text-anchor="middle" fill="#e0b36a" font-family="Georgia, serif" font-size="28" letter-spacing="12">NAATI DHAMAKA</text>
+  <text x="600" y="330" text-anchor="middle" fill="#f4efe6" font-family="Georgia, serif" font-size="72">PAHADI RADIO</text>
+  <text x="600" y="390" text-anchor="middle" fill="#d8cbb8" font-family="Georgia, serif" font-size="32">Pahadon Ki Awaaz</text>
+</svg>

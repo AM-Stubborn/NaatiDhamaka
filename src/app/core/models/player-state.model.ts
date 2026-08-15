@@ -1,0 +1,37 @@
+export type PlayerStateName =
+  | 'UNSTARTED'
+  | 'ENDED'
+  | 'PLAYING'
+  | 'PAUSED'
+  | 'BUFFERING'
+  | 'CUED';
+
+export const YOUTUBE_PLAYER_STATE = {
+  UNSTARTED: -1,
+  ENDED: 0,
+  PLAYING: 1,
+  PAUSED: 2,
+  BUFFERING: 3,
+  CUED: 5,
+} as const;
+
+const PLAYER_STATE_BY_CODE: Record<number, PlayerStateName> = {
+  [YOUTUBE_PLAYER_STATE.UNSTARTED]: 'UNSTARTED',
+  [YOUTUBE_PLAYER_STATE.ENDED]: 'ENDED',
+  [YOUTUBE_PLAYER_STATE.PLAYING]: 'PLAYING',
+  [YOUTUBE_PLAYER_STATE.PAUSED]: 'PAUSED',
+  [YOUTUBE_PLAYER_STATE.BUFFERING]: 'BUFFERING',
+  [YOUTUBE_PLAYER_STATE.CUED]: 'CUED',
+};
+
+export function toPlayerStateName(code: number): PlayerStateName {
+  return PLAYER_STATE_BY_CODE[code] ?? 'UNSTARTED';
+}
+
+export const YOUTUBE_ERROR = {
+  INVALID_PARAMETER: 2,
+  HTML5_ERROR: 5,
+  VIDEO_NOT_FOUND: 100,
+  EMBED_NOT_ALLOWED: 101,
+  EMBED_NOT_ALLOWED_ALT: 150,
+} as const;

@@ -1,0 +1,58 @@
+:host {
+  display: block;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-snow);
+  cursor: pointer;
+}
+
+.icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.icon:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.icon:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.icon--play {
+  width: 3.15rem;
+  height: 3.15rem;
+  background: linear-gradient(180deg, #e8c58a 0%, #b8863a 100%);
+  color: #1a140c;
+  box-shadow: 0 8px 18px rgba(184, 134, 58, 0.32);
+}
+
+.icon--play.is-live {
+  box-shadow:
+    0 8px 18px rgba(196, 138, 74, 0.28),
+    0 0 0 4px rgba(224, 179, 106, 0.16);
+}
+
+@media (min-width: 768px) {
+  .actions {
+    gap: 0.2rem;
+  }
+}

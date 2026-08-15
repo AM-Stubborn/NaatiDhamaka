@@ -1,0 +1,117 @@
+<div class="cap">
+  <p class="cap__hint">
+    <span lang="hi">{{ copy.chooseDistrict }}</span>
+    <span class="cap__hint-en">{{ copy.chooseDistrictEn }}</span>
+  </p>
+  <svg
+    class="cap__svg"
+    [attr.viewBox]="viewBox"
+    preserveAspectRatio="xMidYMid meet"
+    role="img"
+    [attr.aria-label]="copy.mapLabel"
+  >
+    <defs>
+      <radialGradient id="capWool" cx="42%" cy="36%" r="68%">
+        <stop offset="0%" stop-color="#7a818c" />
+        <stop offset="55%" stop-color="#4f5560" />
+        <stop offset="100%" stop-color="#2f343c" />
+      </radialGradient>
+      <radialGradient id="capCenter" cx="46%" cy="38%" r="70%">
+        <stop offset="0%" stop-color="#6b717c" />
+        <stop offset="100%" stop-color="#2a2f36" />
+      </radialGradient>
+      <filter id="capShadow" x="-18%" y="-18%" width="136%" height="136%">
+        <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#0a120f" flood-opacity="0.42" />
+      </filter>
+    </defs>
+
+    <ellipse cx="160" cy="160" rx="138" ry="132" fill="url(#capWool)" filter="url(#capShadow)" />
+
+    <circle
+      cx="160"
+      cy="160"
+      r="138"
+      fill="none"
+      stroke="#c43c32"
+      stroke-width="11"
+      stroke-dasharray="9 18"
+    />
+    <circle
+      cx="160"
+      cy="160"
+      r="138"
+      fill="none"
+      stroke="#2f6b3a"
+      stroke-width="11"
+      stroke-dasharray="9 18"
+      stroke-dashoffset="9"
+    />
+    <circle
+      cx="160"
+      cy="160"
+      r="138"
+      fill="none"
+      stroke="#d4a24a"
+      stroke-width="11"
+      stroke-dasharray="9 18"
+      stroke-dashoffset="18"
+    />
+    <circle cx="160" cy="160" r="145" fill="none" stroke="#ead8a8" stroke-width="3" />
+    <circle cx="160" cy="160" r="131" fill="none" stroke="#1f242b" stroke-width="2" opacity="0.35" />
+
+    @for (slice of slices; track slice.id) {
+      <path
+        class="cap__slice"
+        [class.is-selected]="isSelected(slice.id)"
+        [class.is-hovered]="isHovered(slice.id)"
+        [attr.d]="slice.path"
+        role="button"
+        tabindex="0"
+        [attr.aria-pressed]="isSelected(slice.id)"
+        [attr.aria-label]="slice.nameHi + ', ' + slice.nameEn"
+        (click)="onSelect(slice.id, $event)"
+        (keydown)="onKey($event, slice.id)"
+        (mouseenter)="hoveredId.set(slice.id)"
+        (mouseleave)="hoveredId.set(null)"
+        (focus)="hoveredId.set(slice.id)"
+        (blur)="hoveredId.set(null)"
+      >
+        <title>{{ slice.nameHi }} ({{ slice.nameEn }})</title>
+      </path>
+    }
+
+    @for (slice of slices; track slice.id) {
+      <text
+        class="cap__wedge-name"
+        [class.is-active]="isSelected(slice.id) || isHovered(slice.id)"
+        [class.is-long]="slice.isLong"
+        [attr.x]="slice.label.x"
+        [attr.y]="slice.label.y"
+        dominant-baseline="middle"
+        lang="hi"
+      >
+        @if (slice.labelLines.length === 1) {
+          {{ slice.labelLines[0] }}
+        } @else {
+          @for (line of slice.labelLines; track line; let i = $index) {
+            <tspan [attr.x]="slice.label.x" [attr.dy]="i === 0 ? '-0.45em' : '1.15em'">{{ line }}</tspan>
+          }
+        }
+      </text>
+    }
+
+    <circle class="cap__crown" cx="160" cy="160" r="62" fill="url(#capCenter)" />
+    <circle cx="160" cy="160" r="62" fill="none" stroke="#ead8a8" stroke-width="2.2" opacity="0.7" />
+
+    <text
+      class="cap__name"
+      [class.is-long]="displayed().nameHi.length > 6"
+      x="160"
+      y="156"
+      lang="hi"
+    >
+      {{ displayed().nameHi }}
+    </text>
+    <text class="cap__name-en" x="160" y="178">{{ displayed().nameEn }}</text>
+  </svg>
+</div>

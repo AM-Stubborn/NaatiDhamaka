@@ -1,0 +1,9 @@
+<header class="station">
+  <h1 class="station__name" lang="hi">{{ station.displayName }}</h1>
+  @if (listeners(); as count) {
+    <p class="station__live" role="status" aria-live="polite">
+      <span class="station__live-dot" aria-hidden="true"></span>
+      <span>{{ count }} {{ copy.listening }}</span>
+    </p>
+  }
+</header>

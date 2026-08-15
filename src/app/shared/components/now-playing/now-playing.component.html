@@ -1,0 +1,47 @@
+<section class="deck" aria-label="Naati Dhamaka player">
+  <button
+    type="button"
+    class="cover"
+    [class.is-live]="isPlaying()"
+    [disabled]="disabled()"
+    [attr.aria-label]="isPlaying() ? copy.aria.pause : copy.aria.coverPlay"
+    (click)="playPause.emit()"
+  >
+    @if (coverUrl(); as cover) {
+      <img [src]="cover" [alt]="song()?.title || station.name" />
+    } @else {
+      <span class="cover__fallback" aria-hidden="true"></span>
+    }
+  </button>
+
+  <div class="track">
+    <p class="track__name">{{ song()?.title || station.name }}</p>
+    <p class="track__station"><span lang="hi">{{ districtName() }}</span> • {{ stateLabel() }}</p>
+    <div class="progress-row">
+      <span class="progress-row__time">{{ elapsedLabel() }}</span>
+      <div
+        class="progress"
+        role="slider"
+        [attr.tabindex]="disabled() ? -1 : 0"
+        [attr.aria-label]="copy.aria.progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [attr.aria-valuenow]="progressPercent()"
+        [attr.aria-disabled]="disabled()"
+        (click)="onSeekClick($event)"
+        (keydown)="onSeekKey($event)"
+      >
+        <div class="progress__fill" [style.width.%]="progressPercent()"></div>
+      </div>
+      <span class="progress-row__time">{{ durationLabel() }}</span>
+    </div>
+  </div>
+
+  <app-player-controls
+    [isPlaying]="isPlaying()"
+    [disabled]="disabled()"
+    (playPause)="playPause.emit()"
+    (next)="next.emit()"
+    (previous)="previous.emit()"
+  />
+</section>

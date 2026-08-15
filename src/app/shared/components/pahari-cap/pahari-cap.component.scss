@@ -1,0 +1,153 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  width: min(100%, 32rem);
+  height: 100%;
+}
+
+.cap {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  justify-items: center;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cap__hint {
+  display: grid;
+  justify-items: center;
+  gap: 0.08rem;
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--color-snow);
+  text-shadow: 0 8px 18px rgba(8, 14, 12, 0.45);
+}
+
+.cap__hint-en {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.cap__svg {
+  width: 100%;
+  height: 100%;
+  max-height: min(100%, 32rem);
+  overflow: visible;
+  outline: none;
+}
+
+.cap__slice {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke: rgba(234, 216, 168, 0.28);
+  stroke-width: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: fill 0.18s ease, stroke 0.18s ease;
+}
+
+.cap__slice:focus,
+.cap__slice:focus-visible,
+.cap__slice:active {
+  outline: none;
+}
+
+.cap__slice:hover,
+.cap__slice.is-hovered,
+.cap__slice:focus-visible {
+  fill: rgba(212, 162, 74, 0.42);
+  stroke: #f6e7c2;
+}
+
+.cap__slice.is-selected,
+.cap__slice.is-selected:hover,
+.cap__slice.is-selected.is-hovered,
+.cap__slice.is-selected:focus,
+.cap__slice.is-selected:focus-visible {
+  fill: rgba(196, 60, 50, 0.78);
+  stroke: #ead8a8;
+  stroke-width: 1.6;
+}
+
+.cap__wedge-name,
+.cap__name,
+.cap__name-en {
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.cap__wedge-name {
+  fill: #f6f1e8;
+  font-family: var(--font-devanagari);
+  font-size: 11px;
+  font-weight: 700;
+  paint-order: stroke fill;
+  stroke: rgba(18, 24, 28, 0.55);
+  stroke-width: 2.2px;
+}
+
+.cap__wedge-name.is-long {
+  font-size: 8.5px;
+}
+
+.cap__wedge-name.is-active {
+  fill: #ffe7b0;
+  stroke: rgba(10, 18, 16, 0.86);
+}
+
+.cap__name {
+  fill: #f6f1e8;
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+.cap__name.is-long {
+  font-size: 15px;
+}
+
+.cap__name-en {
+  fill: rgba(246, 241, 232, 0.72);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 767px) {
+  :host {
+    width: min(92vw, 24rem);
+  }
+
+  .cap__svg {
+    max-height: min(100%, 24rem);
+  }
+
+  .cap__name {
+    font-size: 20px;
+  }
+
+  .cap__wedge-name {
+    font-size: 9.5px;
+  }
+
+  .cap__wedge-name.is-long {
+    font-size: 7.5px;
+  }
+}
+
+@media (max-height: 740px) {
+  .cap__hint {
+    margin-bottom: 0.2rem;
+  }
+
+  .cap__name {
+    font-size: 18px;
+  }
+}

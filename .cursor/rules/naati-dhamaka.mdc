@@ -1,0 +1,53 @@
+---
+description: Naati Dhamaka product identity, architecture, and visual design for every chat
+alwaysApply: true
+---
+
+# Naati Dhamaka
+
+Himachali web radio. Static Angular SPA. Not a YouTube clone, not a streaming dashboard.
+
+## Identity
+
+- Product: **Naati Dhamaka**
+- On-site title: **नाटी धमाका** (`lang="hi"`)
+- Display font: **Yatra One**; UI font: Outfit; Devanagari UI: Noto Sans Devanagari
+- Do not brand it as "Pahadi Radio" or "Pahadi Naati"
+- No extra taglines, nav, login, sidebars, or playlist tables
+
+## Stack
+
+- Angular 21, standalone components, SCSS, signals, zoneless
+- YouTube **IFrame Player API only** (real iframe)
+- No backend, DB, Spotify, YouTube Data API, audio extraction, scraping, or ad bypass
+- No new npm UI kits; CSS/SVG first
+- Deploy as static files (`ng build` → `dist/naati-dhamaka/browser`)
+
+## Architecture
+
+```
+src/app/core/          constants, models, youtube-player.service, station.service
+src/app/features/radio radio.component (composes the page)
+src/app/shared/        station-header, pahari-cap, now-playing, player-controls, radio-status
+src/environments/      per-district playlist IDs
+```
+
+- UI never talks to `YT.Player` directly — only `YoutubePlayerService`
+- District selection lives in `StationService` (default **shimla**)
+- Clicking a district calls `switchPlaylist()` with `environment.youtube.playlists[id]`
+- Change playlists in environment files, not in player logic
+- Keep iframe in DOM at 200×200 (`.yt-engine`); custom radio UI is the experience
+
+## Design (do not regress)
+
+- Full-bleed background: `public/himachal-valley.png` (sharp Himachal balcony / valley photo)
+- **No** wrapping `radio__content` glass card — title, cap, and player sit on the photo
+- **No** `station__cap-line`
+- District picker is a **circular Pahari/Kullu cap** (`app-pahari-cap`), 12 wedges, embroidered red–green–gold rim
+- Selected district name shows **in the cap center** (Hindi + English); Shimla is 12 o’clock / default
+- Compact player: cover thumbnail, title, district line, seek bar, icon controls
+- Favicon is a round topi (`public/favicon.svg`)
+
+## Future (do not build unless asked)
+
+Multiple named stations, history, favorites, PWA, live counts, admin playlists.

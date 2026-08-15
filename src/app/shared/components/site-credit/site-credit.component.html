@@ -1,0 +1,50 @@
+<div class="credit">
+  <p class="credit__byline">
+    <span>{{ copy.byline }}</span>
+    <a
+      class="credit__link"
+      [href]="copy.makerUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      [attr.aria-label]="copy.aria.makerSite"
+    >
+      {{ copy.makerName }}
+    </a>
+  </p>
+
+  <button
+    type="button"
+    class="credit__info"
+    [attr.aria-label]="copy.aria.openDisclaimer"
+    (click)="openDisclaimer()"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7" />
+      <path d="M12 11.2V17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+      <circle cx="12" cy="8.2" r="1" fill="currentColor" />
+    </svg>
+  </button>
+</div>
+
+@if (disclaimerOpen()) {
+  <div class="sheet" role="presentation" (click)="closeDisclaimer()">
+    <div
+      class="sheet__card"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-labelledby]="'disclaimer-title'"
+      (click)="$event.stopPropagation()"
+    >
+      <h2 id="disclaimer-title" class="sheet__title">{{ copy.disclaimerTitle }}</h2>
+      <p class="sheet__body">{{ copy.disclaimerBody }}</p>
+      <button
+        type="button"
+        class="sheet__close"
+        [attr.aria-label]="copy.aria.closeDisclaimer"
+        (click)="closeDisclaimer()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+}

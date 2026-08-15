@@ -1,0 +1,80 @@
+:host {
+  display: block;
+  width: min(100%, 48rem);
+  height: 100%;
+  min-height: 0;
+}
+
+.radio {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto auto;
+  gap: 0.55rem;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.radio__hero {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  justify-items: center;
+  align-content: center;
+  min-height: 0;
+  overflow: hidden;
+  gap: 0.35rem;
+}
+
+.radio__status {
+  position: absolute;
+  left: 50%;
+  bottom: 8rem;
+  z-index: 2;
+  width: min(calc(100% - 1rem), 28rem);
+  transform: translateX(-50%);
+}
+
+.radio__player {
+  width: min(100%, 46rem);
+  justify-self: center;
+}
+
+app-site-credit {
+  justify-self: center;
+}
+
+.yt-engine {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.yt-mount {
+  width: 200px;
+  height: 200px;
+}
+
+@media (max-width: 767px) {
+  .radio {
+    gap: 0.55rem;
+  }
+
+  .radio__hero {
+    gap: 0.2rem;
+  }
+
+  .radio__status {
+    bottom: 8.75rem;
+  }
+}
+
+@media (max-height: 740px) {
+  .radio {
+    gap: 0.45rem;
+  }
+}
