@@ -105,7 +105,7 @@ This repository is named `NaatiDhamaka`, so project Pages live at:
 https://<user>.github.io/NaatiDhamaka/
 ```
 
-A GitHub Action (`.github/workflows/deploy-github-pages.yml`) builds the production site with `--base-href /NaatiDhamaka/` and publishes `dist/naati-dhamaka/browser`.
+A GitHub Action (`.github/workflows/deploy-github-pages.yml`) builds the production site with `--base-href /` and publishes `dist/naati-dhamaka/browser`.
 
 ### One-time GitHub setup
 
