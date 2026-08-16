@@ -324,6 +324,11 @@ export class YoutubePlayerService {
       this.autoplayBlocked.set(false);
       this.status.set('ready');
       this.startProgressClock();
+    } else if (state === 'BUFFERING') {
+      this.syncProgress();
+      if (this.playRequested) {
+        this.startProgressClock();
+      }
     } else {
       this.stopProgressClock();
       this.syncProgress();
@@ -440,6 +445,7 @@ export class YoutubePlayerService {
 
     if (this.playRequested) {
       this.player?.playVideo();
+      this.startProgressClock();
       return;
     }
 
