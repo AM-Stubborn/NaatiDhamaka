@@ -77,12 +77,12 @@ export class RadioComponent implements OnDestroy {
   }
 
   protected onCategorySelect(id: CategoryId): void {
-    if (id === this.station.selectedId()) {
-      return;
+    if (id !== this.station.selectedId()) {
+      this.station.select(id);
+      this.youtube.switchPlaylist(playlistForCategory(id));
     }
 
-    this.station.select(id);
-    this.youtube.switchPlaylist(playlistForCategory(id));
+    this.youtube.play();
   }
 
   protected onRetry(): void {

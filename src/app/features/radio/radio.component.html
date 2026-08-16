@@ -4,7 +4,7 @@
     <app-pahari-cap [selectedId]="categoryId()" (categorySelect)="onCategorySelect($event)" />
   </div>
 
-  @if (status() === 'loading' || status() === 'error' || status() === 'awaiting-gesture') {
+  @if (status() === 'loading' || status() === 'error') {
     <div class="radio__status">
       <app-radio-status
         [status]="status()"

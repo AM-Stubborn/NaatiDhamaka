@@ -2,11 +2,6 @@
   display: block;
 }
 
-.panel,
-.note {
-  text-align: center;
-}
-
 .panel {
   display: grid;
   justify-items: center;
@@ -15,11 +10,7 @@
   border-radius: 1rem;
   background: rgba(12, 20, 18, 0.72);
   backdrop-filter: blur(14px);
-}
-
-.panel__mark {
-  margin: 0 0 0.4rem;
-  font-size: 2rem;
+  text-align: center;
 }
 
 .panel__kicker {
@@ -60,31 +51,4 @@
 .panel__retry:focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 3px;
-}
-
-.note {
-  margin: 0 auto;
-  padding: 0.7rem 0.9rem;
-  border: 1px solid rgba(224, 179, 106, 0.22);
-  border-radius: 1rem;
-  background: rgba(12, 20, 18, 0.42);
-  backdrop-filter: blur(14px);
-}
-
-.note__mark,
-.note__title,
-.note__hint {
-  margin: 0;
-}
-
-.note__title {
-  margin-top: 0.15rem;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  color: var(--color-snow);
-}
-
-.note__hint {
-  margin-top: 0.2rem;
-  color: var(--color-muted);
 }

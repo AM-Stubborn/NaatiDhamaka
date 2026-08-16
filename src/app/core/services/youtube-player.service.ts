@@ -48,10 +48,7 @@ export class YoutubePlayerService {
     }
     return Math.min(100, Math.max(0, (this.currentTime() / duration) * 100));
   });
-  readonly controlsEnabled = computed(() => {
-    const status = this.status();
-    return status === 'ready' || status === 'awaiting-gesture';
-  });
+  readonly controlsEnabled = computed(() => this.status() === 'ready');
 
   private progressTimer: number | null = null;
 
@@ -88,11 +85,8 @@ export class YoutubePlayerService {
   }
 
   play(): void {
-    if (!this.player) {
-      return;
-    }
     this.playRequested = true;
-    if (this.awaitingPlaylistCue) {
+    if (!this.player || this.awaitingPlaylistCue) {
       return;
     }
     this.enableShuffle();
@@ -136,6 +130,7 @@ export class YoutubePlayerService {
 
   switchPlaylist(playlistId: string): void {
     this.playlistId = playlistId;
+    this.playRequested = true;
     this.unavailableSkips = 0;
     this.currentSong.set(null);
     this.currentIndex.set(-1);
@@ -304,7 +299,7 @@ export class YoutubePlayerService {
     this.playerState.set(state);
 
     if (this.awaitingPlaylistCue) {
-      if (state === 'CUED') {
+      if (state === 'CUED' || state === 'PLAYING') {
         const epoch = this.playlistEpoch;
         this.scheduleTimeout(() => {
           if (epoch !== this.playlistEpoch) {
@@ -322,7 +317,7 @@ export class YoutubePlayerService {
     if (state === 'PLAYING') {
       if (!this.playRequested) {
         this.pause();
-        this.status.set('awaiting-gesture');
+        this.status.set('ready');
         return;
       }
       this.unavailableSkips = 0;
@@ -398,11 +393,17 @@ export class YoutubePlayerService {
       this.logDev('Unable to stop current video before playlist change', error);
     }
 
-    this.player.cuePlaylist({
-      listType: 'playlist',
+    const playlist = {
+      listType: 'playlist' as const,
       list: this.playlistId,
       index: 0,
-    });
+    };
+
+    if (this.playRequested) {
+      this.player.loadPlaylist(playlist);
+    } else {
+      this.player.cuePlaylist(playlist);
+    }
     this.player.setLoop(true);
 
     this.scheduleTimeout(() => {
@@ -435,14 +436,14 @@ export class YoutubePlayerService {
     this.player?.setLoop(true);
     this.syncFromPlayer();
 
+    this.status.set('ready');
+
     if (this.playRequested) {
-      this.status.set('ready');
       this.player?.playVideo();
       return;
     }
 
     this.player?.pauseVideo();
-    this.status.set('awaiting-gesture');
   }
 
   private enableShuffle(): void {

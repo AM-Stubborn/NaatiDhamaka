@@ -30,6 +30,7 @@ class YoutubePlayerStub {
   setShuffle(_enabled: boolean): void {}
   seekToFraction(_fraction: number): void {}
   switchPlaylist(_playlistId: string): void {}
+  play(): void {}
 }
 
 class PresenceStub {
@@ -64,5 +65,6 @@ describe('AppComponent', () => {
     expect(compiled.textContent).toContain('Choose your music');
     expect(compiled.textContent).toContain('Manish Bhatia');
     expect(compiled.querySelector('app-radio')).toBeTruthy();
+    expect(compiled.querySelector('app-valley-motion')).toBeTruthy();
   });
 });

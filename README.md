@@ -81,7 +81,7 @@ This implementation does **not**:
 - bypass ads
 - hide the YouTube player
 
-If a browser blocks autoplay, the station shows **Ready to play** and waits for the first Play tap. That is expected.
+If a browser blocks autoplay, use **Play** or tap a category on the cap. That click is enough to start the radio.
 
 ## Build for production
 

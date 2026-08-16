@@ -10,8 +10,6 @@ export const RADIO_STATION = {
 export const RADIO_COPY = {
   nowPlaying: 'Now Playing',
   loading: 'पहाड़ों में ट्यून हो रहा है...',
-  autoplayTitle: 'Ready to play',
-  autoplayHint: 'Press play to start the radio',
   footerTitle: '',
   footerSubtitle: '',
   retry: 'Try again',

@@ -1,0 +1,452 @@
+:host {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.valley {
+  position: absolute;
+  inset: 0;
+}
+
+.mist {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  opacity: 0.22;
+  background: radial-gradient(ellipse at center, rgba(246, 241, 232, 0.55), transparent 68%);
+}
+
+.mist--a {
+  top: 4%;
+  left: -12%;
+  width: 46vw;
+  height: 18vh;
+  animation: mist-drift 42s ease-in-out infinite alternate;
+}
+
+.mist--b {
+  top: 10%;
+  right: -8%;
+  width: 38vw;
+  height: 14vh;
+  opacity: 0.16;
+  animation: mist-drift 54s ease-in-out infinite alternate-reverse;
+}
+
+.mist--c {
+  top: 22%;
+  left: 28%;
+  width: 30vw;
+  height: 10vh;
+  opacity: 0.12;
+  animation: mist-drift 36s ease-in-out infinite alternate;
+}
+
+.bird,
+.raptor {
+  overflow: visible;
+  color: #171410;
+}
+
+.wing {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  transform-box: fill-box;
+}
+
+.wing--l {
+  transform-origin: 100% 80%;
+  animation: flap-left 0.52s ease-in-out infinite;
+}
+
+.wing--r {
+  transform-origin: 0% 80%;
+  animation: flap-right 0.52s ease-in-out infinite;
+}
+
+.bird--solo-a {
+  position: absolute;
+  top: 9%;
+  left: -6%;
+  width: 2.9rem;
+  opacity: 0.72;
+  animation: fly-east 26s linear infinite both;
+}
+
+.bird--solo-b {
+  position: absolute;
+  top: 16%;
+  right: -8%;
+  width: 2.35rem;
+  opacity: 0.62;
+  animation: fly-west 34s linear infinite both;
+  animation-delay: 8s;
+}
+
+.bird--solo-b .wing {
+  animation-duration: 0.62s;
+}
+
+.flight {
+  position: absolute;
+  top: 11%;
+  left: -10%;
+  width: 7.2rem;
+  height: 3.8rem;
+  opacity: 0.7;
+  animation: fly-east 32s linear infinite both;
+  animation-delay: 14s;
+}
+
+.flight .bird {
+  position: absolute;
+  width: 2rem;
+}
+
+.bird--lead {
+  top: 0;
+  left: 2.6rem;
+}
+
+.bird--left {
+  top: 1.45rem;
+  left: 0;
+}
+
+.bird--right {
+  top: 1.6rem;
+  left: 4.85rem;
+}
+
+.flight .wing {
+  animation-duration: 0.44s;
+}
+
+.raptor-sky {
+  position: absolute;
+  top: 13%;
+  left: 58%;
+  width: 8.5rem;
+  height: 8.5rem;
+}
+
+.raptor {
+  position: absolute;
+  width: 3.4rem;
+  opacity: 0.68;
+  offset-path: path('M 68 68 m -52 0 a 52 52 0 1 1 104 0 a 52 52 0 1 1 -104 0');
+  offset-rotate: auto;
+  animation: soar 48s linear infinite;
+}
+
+.raptor .wing {
+  stroke-width: 1.9;
+  animation-duration: 3.8s;
+  animation-timing-function: ease-in-out;
+}
+
+.raptor .wing--l {
+  animation-name: soar-left;
+}
+
+.raptor .wing--r {
+  animation-name: soar-right;
+}
+
+.flock {
+  position: absolute;
+  left: 7%;
+  top: 49%;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.35rem;
+  filter: drop-shadow(0 2px 1px rgba(20, 16, 10, 0.35));
+  animation: flock-trek 42s linear infinite;
+}
+
+.sheep {
+  display: block;
+  fill: #efe6d4;
+  animation: sheep-bob 0.7s ease-in-out infinite;
+}
+
+.sheep__face,
+.sheep .leg {
+  fill: #2a241c;
+}
+
+.sheep .leg {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+
+.leg--1,
+.leg--3 {
+  animation: step-a 0.7s ease-in-out infinite;
+}
+
+.leg--2,
+.leg--4 {
+  animation: step-b 0.7s ease-in-out infinite;
+}
+
+.sheep--a {
+  width: 1.7rem;
+}
+
+.sheep--b {
+  width: 2rem;
+  margin-bottom: 0.12rem;
+  animation-delay: -0.18s;
+}
+
+.sheep--b .leg {
+  animation-delay: -0.18s;
+}
+
+.sheep--c {
+  width: 1.55rem;
+  animation-delay: -0.4s;
+}
+
+.sheep--c .leg {
+  animation-delay: -0.4s;
+}
+
+@keyframes mist-drift {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(8vw);
+  }
+}
+
+@keyframes flap-left {
+  0%,
+  100% {
+    transform: rotate(-12deg);
+  }
+
+  50% {
+    transform: rotate(26deg);
+  }
+}
+
+@keyframes flap-right {
+  0%,
+  100% {
+    transform: rotate(12deg);
+  }
+
+  50% {
+    transform: rotate(-26deg);
+  }
+}
+
+@keyframes soar-left {
+  0%,
+  82%,
+  100% {
+    transform: rotate(-8deg);
+  }
+
+  88% {
+    transform: rotate(18deg);
+  }
+
+  94% {
+    transform: rotate(-14deg);
+  }
+}
+
+@keyframes soar-right {
+  0%,
+  82%,
+  100% {
+    transform: rotate(8deg);
+  }
+
+  88% {
+    transform: rotate(-18deg);
+  }
+
+  94% {
+    transform: rotate(14deg);
+  }
+}
+
+@keyframes fly-east {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+
+  6% {
+    opacity: 0.62;
+  }
+
+  90% {
+    opacity: 0.62;
+  }
+
+  100% {
+    transform: translate3d(118vw, 7vh, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes fly-west {
+  0% {
+    transform: translate3d(0, 0, 0) scaleX(-1);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.5;
+  }
+
+  90% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate3d(-118vw, 5vh, 0) scaleX(-1);
+    opacity: 0;
+  }
+}
+
+@keyframes soar {
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes flock-trek {
+  0% {
+    transform: translate3d(0, 0, 0) scaleX(1);
+  }
+
+  46% {
+    transform: translate3d(16vw, 4.5vh, 0) scaleX(1);
+  }
+
+  50% {
+    transform: translate3d(16vw, 4.5vh, 0) scaleX(-1);
+  }
+
+  96% {
+    transform: translate3d(0, 0, 0) scaleX(-1);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scaleX(1);
+  }
+}
+
+@keyframes sheep-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes step-a {
+  0%,
+  100% {
+    transform: rotate(-16deg);
+  }
+
+  50% {
+    transform: rotate(16deg);
+  }
+}
+
+@keyframes step-b {
+  0%,
+  100% {
+    transform: rotate(16deg);
+  }
+
+  50% {
+    transform: rotate(-16deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .flock {
+    left: 3%;
+    top: 46%;
+    gap: 0.2rem;
+  }
+
+  .sheep--a,
+  .sheep--c {
+    width: 1.25rem;
+  }
+
+  .sheep--b {
+    width: 1.45rem;
+  }
+
+  .raptor-sky {
+    left: 62%;
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+
+  .bird--solo-a {
+    width: 2.45rem;
+  }
+
+  .bird--solo-b {
+    width: 2rem;
+  }
+
+  .flight {
+    width: 6rem;
+    height: 3.2rem;
+  }
+
+  .flight .bird {
+    width: 1.7rem;
+  }
+
+  .bird--lead {
+    left: 2.15rem;
+  }
+
+  .bird--left {
+    top: 1.2rem;
+  }
+
+  .bird--right {
+    top: 1.35rem;
+    left: 4rem;
+  }
+
+  .raptor {
+    width: 2.8rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .flock {
+    top: 44%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    display: none;
+  }
+}
